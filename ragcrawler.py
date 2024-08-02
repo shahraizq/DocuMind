@@ -20,8 +20,11 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # Streamlit configuration
 st.set_page_config(page_title="DocuMind", layout="wide")
 
-# OpenAI client configuration
-client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+# Fetch the BASE_URL from environment variables, default to localhost if not set
+base_url = os.getenv('BASE_URL', 'http://localhost:1234/v1')
+
+# OpenAI client configuration using environment variable
+client = OpenAI(base_url=base_url, api_key="lm-studio")
 
 # Constants
 EMBEDDING_MODEL = "nomic-ai/nomic-embed-text-v1.5-GGUF"
